@@ -1,0 +1,34 @@
+<manifest xmlns:android="http://schemas.android.com/apk/res/android"
+
+    package="com.nextgames.firebasenotifications">
+
+    <application android:allowBackup="true" android:label="@string/app_name"
+        android:supportsRtl="true">
+
+        <service android:name="com.nextgames.NextFirebaseMessagingService" android:stopWithTask="false" android:exported="true">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT"/>
+            </intent-filter>
+        </service>
+        <receiver android:name="com.leanplum.LeanplumPushReceiver" android:exported="false">
+            <intent-filter>
+                <!-- Only add this action for Firebase Cloud Messaging -->
+                <action android:name="com.nextgames.NextFirebaseMessagingService" />
+            </intent-filter>
+        </receiver>
+        <service android:name="com.leanplum.LeanplumLocalPushListenerService" android:exported="true" />
+        <service android:name="com.leanplum.LeanplumPushRegistrationService" android:exported="true" />
+        <!-- Add the next two services for Firebase Cloud Messaging -->
+        <service android:name="com.leanplum.LeanplumPushFirebaseMessagingService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.MESSAGING_EVENT" />
+            </intent-filter>
+        </service>
+        <service android:name="com.leanplum.LeanplumPushFcmListenerService" android:exported="false">
+            <intent-filter>
+                <action android:name="com.google.firebase.INSTANCE_ID_EVENT" />
+            </intent-filter>
+        </service>
+    </application>
+
+</manifest>
